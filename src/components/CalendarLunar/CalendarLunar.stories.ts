@@ -1,5 +1,5 @@
 import { CalendarLunar } from './index'
-import type { Meta, StoryObj } from '@storybook/react';
+import type { StoryObj } from '@storybook/react';
 
 const meta = {
   title: 'Example/CalendarLunar',

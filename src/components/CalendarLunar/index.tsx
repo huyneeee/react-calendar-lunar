@@ -1,49 +1,25 @@
 import { useEffect } from 'react';
 import React from 'react';
 import './calendar.css';
-import { DAYNAMES, LE, MONTHS, TK13, TK14, TK15, TK16, TK17, TK18, TK19, TK20, TK21, TK22 } from '../../constant';
+import {
+  DAYNAMES,
+  LE,
+  MONTHS,
+  TK13,
+  TK14,
+  TK15,
+  TK16,
+  TK17,
+  TK18,
+  TK19,
+  TK20,
+  TK21,
+  TK22,
+} from '../../../constant';
 
-interface CalendarProps {
+export interface CalendarProps {
   onClick?: VoidFunction;
 }
-
-function INT(d: number) {
-  return Math.floor(d);
-}
-
-function LunarDate(
-  day: number,
-  month: number,
-  year: number,
-  leap: number,
-  jd: number
-) {
-  return {
-    day,
-    month,
-    year,
-    leap,
-    jd,
-  };
-}
-
-function jdn(dd: number, mm: number, yy: number) {
-  var a = INT((14 - mm) / 12);
-  var y = yy + 4800 - a;
-  var m = mm + 12 * a - 3;
-  var jd =
-    dd +
-    INT((153 * m + 2) / 5) +
-    365 * y +
-    INT(y / 4) -
-    INT(y / 100) +
-    INT(y / 400) -
-    32045;
-  return jd;
-  //return 367*yy - INT(7*(yy+INT((mm+9)/12))/4) - INT(3*(INT((yy+(mm-9)/7)/100)+1)/4) + INT(275*mm/9)+dd+1721029;
-}
-
-
 
 export const CalendarLunar = ({ onClick }: CalendarProps) => {
   const FIRST_DAY = jdn(31, 1, 1200);
@@ -53,6 +29,41 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
     currentMonth = today.getMonth() + 1,
     currentYear = today.getFullYear();
 
+  function INT(d: number) {
+    return Math.floor(d);
+  }
+
+  function LunarDate(
+    day: number,
+    month: number,
+    year: number,
+    leap: number,
+    jd: number
+  ) {
+    return {
+      day,
+      month,
+      year,
+      leap,
+      jd,
+    };
+  }
+
+  function jdn(dd: number, mm: number, yy: number) {
+    var a = INT((14 - mm) / 12);
+    var y = yy + 4800 - a;
+    var m = mm + 12 * a - 3;
+    var jd =
+      dd +
+      INT((153 * m + 2) / 5) +
+      365 * y +
+      INT(y / 4) -
+      INT(y / 100) +
+      INT(y / 400) -
+      32045;
+    return jd;
+    //return 367*yy - INT(7*(yy+INT((mm+9)/12))/4) - INT(3*(INT((yy+(mm-9)/7)/100)+1)/4) + INT(275*mm/9)+dd+1721029;
+  }
   function decodeLunarYear(yy: any, k: number) {
     var monthLengths,
       regularMonths,
@@ -63,7 +74,7 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
       currentJD,
       j,
       mm;
-    var ly = [];
+    var ly = [] as any[];
     monthLengths = [29, 30];
     regularMonths = new Array(12);
     offsetOfTet = k >> 17;

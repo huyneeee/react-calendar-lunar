@@ -1,12 +1,13 @@
 {
-  "name": "calendar-lunar",
-  "version": "1.0.0",
+  "name": "react-calendar-lunar",
+  "version": "6.0.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
   "files": [
     "dist"
   ],
+  "private": false,
   "scripts": {
     "build": "rm -rf /dist && npm run build:esm & npm run build:cjs",
     "build:esm": "tsc",
@@ -16,10 +17,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/huyneeee/react-canlendar-lunar.git"
+    "url": "git+https://github.com/huyneeee/react-calendar-lunar.git"
   },
   "keywords": [
-    "calendar-lunar"
+    "calendar-lunar",
+    "react",
+    "lunar",
+    "typescript",
+    "react-canlendar-lunar",
+    "select",
+    "select-calendar-lunar"
   ],
   "author": "Nguyen Quang Huy (huyneeee)",
   "license": "ISC",
