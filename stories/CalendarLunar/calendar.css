@@ -1,0 +1,195 @@
+.wrapper-calendar-lunar {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.06);
+  padding: 8px;
+  border-radius: 12px;
+  min-width: 350px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.wrapper-calendar-lunar .amlich {
+  border-collapse: collapse;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+  margin-bottom: 1.3rem;
+  width: 100%;
+}
+.wrapper-calendar-lunar .amlich .calendar-day {
+  text-align: center;
+  font-weight: 700;
+}
+.wrapper-calendar-lunar .amlich .calendar-day .day-num {
+  font-size: 80px;
+  font-family: Roboto, sans-serif;
+  line-height: 100%;
+  color: #31708f;
+}
+.wrapper-calendar-lunar .amlich .lunar-day-num {
+  font-size: 44px;
+  line-height: 100%;
+  font-weight: 700;
+  color: #3c763d;
+}
+.wrapper-calendar-lunar .amlich .calendar-holiday {
+  color: #f89696;
+  font-weight: 700;
+}
+.wrapper-calendar-lunar .amlich a {
+  text-decoration: none;
+  color: #a165f0;
+  display: block;
+}
+.wrapper-calendar-lunar .amlich .tenthang {
+  text-shadow: 0 0 3px #000;
+  font-weight: 600;
+  font-size: 1.3rem;
+  line-height: 1.4rem;
+  color: #a165f0;
+  text-shadow: none;
+}
+.wrapper-calendar-lunar .amlich .navi-l {
+  font-size: 12px;
+  text-align: left;
+}
+.wrapper-calendar-lunar .amlich .navi-r {
+  font-size: 12px;
+  text-align: right;
+}
+.wrapper-calendar-lunar .amlich .ngaytuan {
+  text-align: center;
+  color: #949494;
+  padding: 3px;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.3rem;
+  flex: 1;
+}
+.wrapper-calendar-lunar .amlich .ngaythang {
+  color: #5a5c5b;
+}
+.wrapper-calendar-lunar .amlich tr:nth-child(odd) td.ngaythang:nth-child(2n) {
+  background-color: #fff;
+}
+.wrapper-calendar-lunar .amlich tr:nth-child(2n) td.ngaythang:nth-child(odd) {
+  background-color: #fff;
+}
+.wrapper-calendar-lunar .amlich tr td.ngaythang:hover {
+  background-color: #f5f5f5 !important;
+}
+.wrapper-calendar-lunar .amlich .homnay {
+  border: 1.5px solid #f89696;
+  border-radius: 15px;
+  color: #f89696;
+  font-weight: 500;
+}
+.wrapper-calendar-lunar .amlich .homnay > .t2t6 {
+  color: #f89696;
+}
+.wrapper-calendar-lunar .amlich .am {
+  font-weight: 200;
+  font-size: 10px;
+  line-height: 1rem;
+  text-align: right;
+  color: #909090;
+  position: absolute;
+  right: 10%;
+  top: 7%;
+}
+.wrapper-calendar-lunar .amlich .am2 {
+  text-align: right;
+  font-size: 75%;
+  color: #494949;
+}
+.wrapper-calendar-lunar .amlich .t2t6 {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  text-align: left;
+  font-weight: 500;
+  color: #494949;
+}
+.wrapper-calendar-lunar .amlich .t7 {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  text-align: left;
+}
+.wrapper-calendar-lunar .amlich .cn {
+  font-size: 1rem;
+  line-height: 1.3rem;
+  text-align: left;
+}
+.wrapper-calendar-lunar .amlich tbody {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 5px;
+}
+.wrapper-calendar-lunar .amlich tbody tr {
+  display: flex;
+  gap: 5px;
+  justify-content: space-between;
+}
+.wrapper-calendar-lunar .amlich .homnay, .wrapper-calendar-lunar .amlich .leam, .wrapper-calendar-lunar .amlich .leduong, .wrapper-calendar-lunar .amlich .ngaythang, .wrapper-calendar-lunar .amlich .tet {
+  position: relative;
+  width: calc(100% / 7);
+  cursor: pointer;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+}
+.wrapper-calendar-lunar .amlich .homnay > div, .wrapper-calendar-lunar .amlich .leam > div, .wrapper-calendar-lunar .amlich .leduong > div, .wrapper-calendar-lunar .amlich .ngaythang > div, .wrapper-calendar-lunar .amlich .tet > div {
+  border-radius: 15px;
+  overflow: hidden;
+}
+.wrapper-calendar-lunar .amlich .leam::after, .wrapper-calendar-lunar .amlich .leduong::after, .wrapper-calendar-lunar .amlich .tet::after {
+  content: '';
+  width: 6px;
+  height: 6px;
+  background: #ff5d73;
+  border-radius: 50%;
+  position: absolute;
+  top: 70%;
+}
+.wrapper-calendar-lunar .amlich .leam:hover, .wrapper-calendar-lunar .amlich .leduong:hover, .wrapper-calendar-lunar .amlich .tet:hover {
+  background-color: #f5f5f5;
+}
+.wrapper-calendar-lunar .calendar {
+  font-size: 12px;
+}
+.wrapper-calendar-lunar .calendar td {
+  background-color: #e9eff3;
+}
+.wrapper-calendar-lunar .calendar-month {
+  background-color: #1e8cbe !important;
+  color: #fff;
+  text-shadow: 0 0 3px #000;
+  padding: 6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 14px !important;
+}
+.wrapper-calendar-lunar .amlich-tennam {
+  text-align: center;
+  font-weight: 700;
+  color: #000;
+  background-color: #ccc;
+  font-size: 14px;
+  font-family: Roboto, sans-serif;
+}
+.wrapper-calendar-lunar .t-head {
+  border-bottom: 1px solid #dcdcdc;
+  margin: 15px 0px;
+  padding: 15px 0px;
+}
+.wrapper-calendar-lunar .text {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3rem;
+}
+.wrapper-calendar-lunar .title-canlendar {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.3rem;
+  color: #424241;
+  text-align: center;
+}
