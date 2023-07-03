@@ -15,7 +15,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
   args: {
     value: new Date('7/5/2023'),
-    onSelect: (date)=>{
+    handleSelect: (date)=>{
       console.log('date', date)
     }
   },

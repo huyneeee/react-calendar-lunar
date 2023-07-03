@@ -43,7 +43,6 @@ import React from 'react';
 import { Calendar } from 'react-calendar-lunar';
 
 const App = () => {
-  const [date, setDate] = useState(new Date());
   return (
     <div>
       <h1>Lunar and Solar Calendar</h1>
