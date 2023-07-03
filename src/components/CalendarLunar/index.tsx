@@ -34,7 +34,8 @@ type ArgsHandleSelect = {
 export interface CalendarProps {
   handleSelect?: (date: ArgsHandleSelect) => void;
   customStyle?: object;
-  value: Date;
+  value?: Date;
+  containerClass?: string;
 }
 
 const PI = Math.PI;
@@ -127,7 +128,8 @@ function getDayString(lunar, solarDay, solarMonth, solarYear) {
 export const CalendarLunar = ({
   handleSelect,
   customStyle,
-  value: dateSelect = new Date(),
+  value: dateSelect,
+  containerClass,
 }: CalendarProps) => {
   const FIRST_DAY = jdn(31, 1, 1200);
   const LAST_DAY = jdn(31, 12, 2199);
@@ -297,13 +299,13 @@ export const CalendarLunar = ({
     return result;
   }
 
-  function printMonth(mm: number, yy: number, dateSelect: Date) {
+  function printMonth(mm: number, yy: number, dateSelect?: Date) {
     var res = '';
     res += printTable(mm, yy, dateSelect);
     return res;
   }
 
-  function printTable(mm: any, yy: any, dateSelect: Date) {
+  function printTable(mm: any, yy: any, dateSelect?: Date) {
     var i, j, k, solar;
     var currentMonth = getMonth(mm, yy);
     if (currentMonth.length == 0) return false;
@@ -407,7 +409,7 @@ export const CalendarLunar = ({
     solarDate: string | number,
     solarMonth: string | number,
     solarYear: string | number,
-    dateSelect: Date
+    dateSelect?: Date
   ) {
     // var cellClass, solarClass, lunarClass, solarColor,
     let cellClass = 'ngaythang';
@@ -465,11 +467,13 @@ export const CalendarLunar = ({
       }
     }
 
-    var selectClass = ''
-    if(solarDate == dateSelect.getDate() &&
-    solarMonth == dateSelect.getMonth() + 1 &&
-    solarYear == dateSelect.getFullYear()){
-      selectClass = 'date-select'
+    var selectClass = '';
+    if (
+      solarDate == dateSelect?.getDate() &&
+      solarMonth == dateSelect?.getMonth() + 1 &&
+      solarYear == dateSelect?.getFullYear()
+    ) {
+      selectClass = 'date-select';
     }
     var lunar = lunarDate.day;
     if (solarDate == 1 || lunar == 1) {
@@ -554,7 +558,10 @@ export const CalendarLunar = ({
   }, [dateSelect]);
 
   return (
-    <div className='wrapper-calendar-lunar' style={customStyle}>
+    <div
+      className={`${containerClass ?? ''} wrapper-calendar-lunar`}
+      style={customStyle}
+    >
       <div className='calendar-lunar'></div>
     </div>
   );

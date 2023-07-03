@@ -58,12 +58,11 @@ You can also customize the properties and handle events of the `<Calendar />` co
 
 ```javascript
 <Calendar
-  locale="en"
-  timezone="America/New_York"
-  onSelectDate={handleSelectDate}
-  events={events}
-  holidays={holidays}
-  customStyles={customStyles}
+  value={new Date()}
+  customStyle={{
+    background: 'red'
+  }}
+  handleSelect={(args)=>{}}
 />
 ```
 
