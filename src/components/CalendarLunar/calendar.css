@@ -3,7 +3,6 @@
   padding: 8px;
   border-radius: 12px;
   min-width: 350px;
-  max-width: 800px;
   margin: 0 auto;
 }
 .wrapper-calendar-lunar .amlich {
@@ -127,7 +126,11 @@
   gap: 5px;
   justify-content: space-between;
 }
-.wrapper-calendar-lunar .amlich .homnay, .wrapper-calendar-lunar .amlich .leam, .wrapper-calendar-lunar .amlich .leduong, .wrapper-calendar-lunar .amlich .ngaythang, .wrapper-calendar-lunar .amlich .tet {
+.wrapper-calendar-lunar .amlich .homnay,
+.wrapper-calendar-lunar .amlich .leam,
+.wrapper-calendar-lunar .amlich .leduong,
+.wrapper-calendar-lunar .amlich .ngaythang,
+.wrapper-calendar-lunar .amlich .tet {
   position: relative;
   width: calc(100% / 7);
   cursor: pointer;
@@ -137,11 +140,17 @@
   align-items: center;
   border-radius: 15px;
 }
-.wrapper-calendar-lunar .amlich .homnay > div, .wrapper-calendar-lunar .amlich .leam > div, .wrapper-calendar-lunar .amlich .leduong > div, .wrapper-calendar-lunar .amlich .ngaythang > div, .wrapper-calendar-lunar .amlich .tet > div {
+.wrapper-calendar-lunar .amlich .homnay > div,
+.wrapper-calendar-lunar .amlich .leam > div,
+.wrapper-calendar-lunar .amlich .leduong > div,
+.wrapper-calendar-lunar .amlich .ngaythang > div,
+.wrapper-calendar-lunar .amlich .tet > div {
   border-radius: 15px;
   overflow: hidden;
 }
-.wrapper-calendar-lunar .amlich .leam::after, .wrapper-calendar-lunar .amlich .leduong::after, .wrapper-calendar-lunar .amlich .tet::after {
+.wrapper-calendar-lunar .amlich .leam::after,
+.wrapper-calendar-lunar .amlich .leduong::after,
+.wrapper-calendar-lunar .amlich .tet::after {
   content: '';
   width: 6px;
   height: 6px;
@@ -150,7 +159,9 @@
   position: absolute;
   top: 70%;
 }
-.wrapper-calendar-lunar .amlich .leam:hover, .wrapper-calendar-lunar .amlich .leduong:hover, .wrapper-calendar-lunar .amlich .tet:hover {
+.wrapper-calendar-lunar .amlich .leam:hover,
+.wrapper-calendar-lunar .amlich .leduong:hover,
+.wrapper-calendar-lunar .amlich .tet:hover {
   background-color: #f5f5f5;
 }
 .wrapper-calendar-lunar .calendar {
@@ -192,4 +203,18 @@
   line-height: 1.3rem;
   color: #424241;
   text-align: center;
+}
+
+.date-select {
+  background-color: #ff5d73;
+}
+.wrapper-calendar-lunar .amlich .date-select .t2t6,
+.wrapper-calendar-lunar .amlich .date-select .t7,
+.wrapper-calendar-lunar .amlich .date-select .cn,
+.wrapper-calendar-lunar .amlich .date-select .am {
+  color: #fff;
+}
+
+.wrapper-calendar-lunar .amlich tr td.date-select:hover{
+  background-color: #ff5d73 !important;
 }

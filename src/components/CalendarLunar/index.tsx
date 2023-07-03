@@ -2,9 +2,13 @@ import { useEffect } from 'react';
 import React from 'react';
 import './calendar.css';
 import {
+  CAN,
+  CHI,
   DAYNAMES,
+  GIO_HD,
   LE,
   MONTHS,
+  TIETKHI,
   TK13,
   TK14,
   TK15,
@@ -15,13 +19,116 @@ import {
   TK20,
   TK21,
   TK22,
-} from '../../../constant';
+  TUAN,
+} from './constant';
+
+type ArgsHandleSelect = {
+  fullDate: string;
+  dateLunar: string;
+  gioDauNgay: string;
+  tiet: string;
+  gioHoangDao: string;
+  date: Date;
+};
 
 export interface CalendarProps {
-  onClick?: VoidFunction;
+  handleSelect?: (date: ArgsHandleSelect) => void;
+  customStyle?: object;
+  value: Date;
 }
 
-export const CalendarLunar = ({ onClick }: CalendarProps) => {
+const PI = Math.PI;
+
+function INT(d) {
+  return Math.floor(d);
+}
+
+function getGioHoangDao(jd) {
+  var chiOfDay = (jd + 1) % 12;
+  var gioHD = GIO_HD[chiOfDay % 6]; // same values for Ty' (1) and Ngo. (6), for Suu and Mui etc.
+  var ret = '';
+  var count = 0;
+  for (var i = 0; i < 12; i++) {
+    if (gioHD.charAt(i) == '1') {
+      ret += CHI[i];
+      ret += ' (' + ((i * 2 + 23) % 24) + '-' + ((i * 2 + 1) % 24) + ')';
+      if (count++ < 5) ret += ', ';
+      if (count == 3) ret += '\n';
+    }
+  }
+  return ret;
+}
+
+function SunLongitude(jdn) {
+  var T, T2, dr, M, L0, DL, L;
+  T = (jdn - 2451545.0) / 36525; // Time in Julian centuries from 2000-01-01 12:00:00 GMT
+  T2 = T * T;
+  dr = PI / 180; // degree to radian
+  M = 357.5291 + 35999.0503 * T - 0.0001559 * T2 - 0.00000048 * T * T2; // mean anomaly, degree
+  L0 = 280.46645 + 36000.76983 * T + 0.0003032 * T2; // mean longitude, degree
+  DL = (1.9146 - 0.004817 * T - 0.000014 * T2) * Math.sin(dr * M);
+  DL =
+    DL +
+    (0.019993 - 0.000101 * T) * Math.sin(dr * 2 * M) +
+    0.00029 * Math.sin(dr * 3 * M);
+  L = L0 + DL; // true longitude, degree
+  L = L * dr;
+  L = L - PI * 2 * INT(L / (PI * 2)); // Normalize to (0, 2*PI)
+  return L;
+}
+
+function getSunLongitude(dayNumber, timeZone) {
+  return INT((SunLongitude(dayNumber - 0.5 - timeZone / 24.0) / PI) * 12);
+}
+
+function getDayName(lunarDate) {
+  if (lunarDate.day == 0) {
+    return '';
+  }
+  var cc = getCanChi(lunarDate);
+  var s = 'Ngày ' + cc[0] + ', tháng ' + cc[1] + ', năm ' + cc[2];
+  return s;
+}
+
+function getCanHour0(jdn) {
+  return CAN[((jdn - 1) * 2) % 10];
+}
+
+function getYearCanChi(year) {
+  return CAN[(year + 6) % 10] + ' ' + CHI[(year + 8) % 12];
+}
+
+function getCanChi(lunar) {
+  var dayName, monthName, yearName;
+  dayName = CAN[(lunar.jd + 9) % 10] + ' ' + CHI[(lunar.jd + 1) % 12];
+  monthName =
+    CAN[(lunar.year * 12 + lunar.month + 3) % 10] +
+    ' ' +
+    CHI[(lunar.month + 1) % 12];
+  if (lunar.leap == 1) {
+    monthName += ' (nhu\u1EADn)';
+  }
+  yearName = getYearCanChi(lunar.year);
+  return new Array(dayName, monthName, yearName);
+}
+
+function getDayString(lunar, solarDay, solarMonth, solarYear) {
+  var s;
+  var dayOfWeek = TUAN[(lunar.jd + 1) % 7];
+  s = dayOfWeek + ' ' + solarDay + '/' + solarMonth + '/' + solarYear;
+  s += ' -+- ';
+  s = s + 'Ngày ' + lunar.day + ' tháng ' + lunar.month;
+  if (lunar.leap == 1) {
+    s = s + ' nhu\u1EADn';
+  }
+  return s;
+}
+
+export const CalendarLunar = ({
+  handleSelect,
+  customStyle,
+  value: dateSelect = new Date(),
+}: CalendarProps) => {
   const FIRST_DAY = jdn(31, 1, 1200);
   const LAST_DAY = jdn(31, 12, 2199);
   var settings = {} as any,
@@ -41,11 +148,11 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
     jd: number
   ) {
     return {
-      day,
-      month,
-      year,
-      leap,
-      jd,
+      day: Number(day),
+      month: Number(month),
+      year: Number(year),
+      leap: Number(leap),
+      jd: Number(jd),
     };
   }
 
@@ -190,13 +297,13 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
     return result;
   }
 
-  function printMonth(mm: number, yy: number) {
+  function printMonth(mm: number, yy: number, dateSelect: Date) {
     var res = '';
-    res += printTable(mm, yy);
+    res += printTable(mm, yy, dateSelect);
     return res;
   }
 
-  function printTable(mm: any, yy: any) {
+  function printTable(mm: any, yy: any, dateSelect: Date) {
     var i, j, k, solar;
     var currentMonth = getMonth(mm, yy);
     if (currentMonth.length == 0) return false;
@@ -221,7 +328,7 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
         } else {
           solar = k - emptyCells + 1;
           ld1 = currentMonth[k - emptyCells];
-          res += printCell(ld1, solar, mm, yy);
+          res += printCell(ld1, solar, mm, yy, dateSelect);
         }
       }
       res += '</tr>\n';
@@ -299,7 +406,8 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
     lunarDate: any,
     solarDate: string | number,
     solarMonth: string | number,
-    solarYear: string | number
+    solarYear: string | number,
+    dateSelect: Date
   ) {
     // var cellClass, solarClass, lunarClass, solarColor,
     let cellClass = 'ngaythang';
@@ -356,6 +464,13 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
         cellClass = 'leduong homnay';
       }
     }
+
+    var selectClass = ''
+    if(solarDate == dateSelect.getDate() &&
+    solarMonth == dateSelect.getMonth() + 1 &&
+    solarYear == dateSelect.getFullYear()){
+      selectClass = 'date-select'
+    }
     var lunar = lunarDate.day;
     if (solarDate == 1 || lunar == 1) {
       lunar =
@@ -376,7 +491,7 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
       lunarDate.leap;
     args +=
       ',' + lunarDate.jd + ',' + solarDate + ',' + solarMonth + ',' + solarYear;
-    res += '<td class="' + cellClass + '"';
+    res += '<td class="' + cellClass + ' ' + selectClass + ' date-cell"';
     res +=
       lunarDate != null
         ? ' title="' + titleTooltip + '" data-args="' + args + '"'
@@ -388,11 +503,23 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
     return res;
   }
 
+  function getDayInfo(dd, mm, yy, leap, jd, sday, smonth, syear) {
+    var lunar = LunarDate(dd, mm, yy, leap, jd);
+    return {
+      fullDate: getDayString(lunar, sday, smonth, syear),
+      dateLunar: getDayName(lunar),
+      gioDauNgay: getCanHour0(jd) + ' ' + CHI[0],
+      tiet: TIETKHI[getSunLongitude(jd + 1, 7.0)],
+      gioHoangDao: getGioHoangDao(jd),
+      date: new Date(`${mm}/${dd}/${yy}`),
+    };
+  }
+
   useEffect(() => {
     var app = document.querySelector('.calendar-lunar') as any;
-    const result = printMonth(currentMonth, currentYear);
+    const result = printMonth(currentMonth, currentYear, dateSelect);
     app.innerHTML = result;
-  }, []);
+  }, [dateSelect]);
 
   useEffect(() => {
     const app = document.querySelector('.calendar-lunar') as any;
@@ -403,15 +530,31 @@ export const CalendarLunar = ({ onClick }: CalendarProps) => {
         e.target.parentElement.className === 'next-month' ||
         e.target.parentElement.className === 'prev-month'
       ) {
-        const result = printMonth(mm, yy);
+        const result = printMonth(mm, yy, dateSelect);
         app.innerHTML = result;
+      }
+
+      if (e?.target?.classList?.contains('date-cell')) {
+        const data = e.target.dataset.args;
+        const [dd, mm, yy, leap, jd, sday, smonth, syear] = data.split(',');
+        const dateInfo = getDayInfo(
+          Number(dd),
+          Number(mm),
+          Number(yy),
+          Number(leap),
+          Number(jd),
+          Number(sday),
+          Number(smonth),
+          Number(syear)
+        );
+        handleSelect && handleSelect(dateInfo);
       }
     });
     return window.removeEventListener('click', function () {});
-  }, []);
+  }, [dateSelect]);
 
   return (
-    <div className='wrapper-calendar-lunar'>
+    <div className='wrapper-calendar-lunar' style={customStyle}>
       <div className='calendar-lunar'></div>
     </div>
   );

@@ -1,9 +1,9 @@
-import { CalendarLunar } from './index'
+import { SelectCalendarLunar } from './index'
 import type { StoryObj } from '@storybook/react';
 
 const meta = {
-  title: 'Example/CalendarLunar',
-  component: CalendarLunar,
+  title: 'Example/SelectCalendarLunar',
+  component: SelectCalendarLunar,
   tags: ['autodocs'],
   argTypes: {
   },
@@ -14,6 +14,9 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    value: new Date()
+    value: new Date('7/5/2023'),
+    onSelect: (date)=>{
+      console.log('date', date)
+    }
   },
 };
