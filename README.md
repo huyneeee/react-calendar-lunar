@@ -36,7 +36,7 @@ First, import the package into your project:
 import { Calendar, SelectCalendarLunar } from 'react-calendar-lunar';
 ```
 
-Then, you can use the `<Calendar /> <SelectCalendarLunar />` component in your React application:
+Then, you can use the `<Calendar /> | <SelectCalendarLunar />` component in your React application:
 
 ```javascript
 import React from 'react';

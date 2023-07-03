@@ -34,13 +34,13 @@ type ArgsHandleSelect = {
 };
 
 export interface PropsSelectCalendarLunar {
-  onSelect: (date: ArgsHandleSelect) => void;
+  handleSelect: (date: ArgsHandleSelect) => void;
   value: Date;
   format?: string;
 }
 
 export const SelectCalendarLunar = ({
-  onSelect,
+  handleSelect,
   value,
   format,
 }: PropsSelectCalendarLunar) => {
@@ -73,7 +73,7 @@ export const SelectCalendarLunar = ({
               boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
             }}
             handleSelect={(date) => {
-              onSelect(date);
+              handleSelect(date);
               setIsFocus(false);
             }}
             value={value}
