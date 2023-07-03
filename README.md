@@ -40,7 +40,7 @@ Then, you can use the `<Calendar /> | <SelectCalendarLunar />` component in your
 
 ```javascript
 import React from 'react';
-import { Calendar, SelectCalendarLunar } from 'react-calendar-lunar';
+import { Calendar } from 'react-calendar-lunar';
 
 const App = () => {
   const [date, setDate] = useState(new Date());
@@ -48,9 +48,25 @@ const App = () => {
     <div>
       <h1>Lunar and Solar Calendar</h1>
       <Calendar />
+    </div>
+  );
+};
+
+export default App;
+```
+
+```javascript
+import React from 'react';
+import { SelectCalendarLunar } from 'react-calendar-lunar';
+
+const App = () => {
+  const [date, setDate] = useState(new Date());
+  return (
+    <div>
+      <h1>Lunar and Solar Calendar</h1>
       <SelectCalendarLunar
         value={date}
-        onSelect={(args) => setDate(args.date)}
+        handleSelect={(args) => setDate(args.date)}
         format='dd/mm/yyyy'
       />
     </div>
