@@ -33,20 +33,26 @@ yarn add react-calendar-lunar
 First, import the package into your project:
 
 ```javascript
-import Calendar from 'react-calendar-lunar';
+import { Calendar, SelectCalendarLunar } from 'react-calendar-lunar';
 ```
 
-Then, you can use the `<Calendar />` component in your React application:
+Then, you can use the `<Calendar /> <SelectCalendarLunar />` component in your React application:
 
 ```javascript
 import React from 'react';
-import Calendar from 'react-calendar-lunar';
+import { Calendar, SelectCalendarLunar } from 'react-calendar-lunar';
 
 const App = () => {
+  const [date, setDate] = useState(new Date());
   return (
     <div>
       <h1>Lunar and Solar Calendar</h1>
       <Calendar />
+      <SelectCalendarLunar
+        value={date}
+        onSelect={(args) => setDate(args.date)}
+        format='dd/mm/yyyy'
+      />
     </div>
   );
 };
@@ -60,9 +66,9 @@ You can also customize the properties and handle events of the `<Calendar />` co
 <Calendar
   value={new Date()}
   customStyle={{
-    background: 'red'
+    background: 'red',
   }}
-  handleSelect={(args)=>{}}
+  handleSelect={(args) => {}}
 />
 ```
 
@@ -70,20 +76,17 @@ You can also customize the properties and handle events of the `<Calendar />` co
 
 ### Props
 
-| Prop          | Type        | Description                                                   |
-| ------------- | ----------- | ------------------------------------------------------------- |
-| locale        | string      | The language of the calendar (default: `'en'`)                |
-| timezone      | string      | The time zone (default: `'UTC'`)                              |
-| onSelectDate  | function    | Handler function when a date is selected                      |
-| events        | object      | List of events based on the lunar and solar calendar           |
-| holidays      | object      | List of holidays based on the lunar and solar calendar         |
-| customStyles  | object      | Custom CSS for elements within the calendar (see details below)|
+| Prop         | Type     | Description                                                     |
+| ------------ | -------- | --------------------------------------------------------------- |
+| value        | string   | Object Date Javascript                                          |
+| handleSelect | function | Handler function when a date is selected                        |
+| customStyles | object   | Custom CSS for elements within the calendar (see details below) |
 
 ### Events
 
-| Event          | Description                                                  |
-| -------------- | ------------------------------------------------------------ |
-| onSelectDate   | Fired when a date is selected                                 |
+| Event        | Description                   |
+| ------------ | ----------------------------- |
+| handleSelect | Fired when a date is selected |
 
 ## Customizing the UI
 
@@ -91,25 +94,9 @@ You can customize the UI of `react-calendar-lunar` by passing custom CSS values 
 
 ```javascript
 const customStyles = {
-  calendar: {
-    backgroundColor: 'white',
-    borderRadius: '4px',
-    boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
-  },
-  day: {
-    color: 'black',
-    fontSize: '14px',
-  },
-  selectedDay: {
-    backgroundColor: 'blue',
-    color: 'white',
-  },
-  event: {
-    backgroundColor: 'yellow',
-  },
-  holiday: {
-    fontStyle: 'italic',
-  },
+  backgroundColor: 'white',
+  borderRadius: '4px',
+  boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)',
 };
 ```
 

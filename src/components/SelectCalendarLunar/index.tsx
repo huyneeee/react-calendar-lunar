@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import { useOnClickOutside } from '../../hook/useClickOutSide';
 import { CalendarLunar } from '../CalendarLunar/index';
@@ -30,14 +31,19 @@ type ArgsHandleSelect = {
   tiet: string;
   gioHoangDao: string;
   date: Date;
-}
+};
 
 export interface PropsSelectCalendarLunar {
   onSelect: (date: ArgsHandleSelect) => void;
   value: Date;
+  format?: string;
 }
 
-export const SelectCalendarLunar = ({ onSelect, value }: PropsSelectCalendarLunar) => {
+export const SelectCalendarLunar = ({
+  onSelect,
+  value,
+  format,
+}: PropsSelectCalendarLunar) => {
   const ref = useRef(null);
   const [isFocus, setIsFocus] = useState(false);
 
@@ -57,6 +63,7 @@ export const SelectCalendarLunar = ({ onSelect, value }: PropsSelectCalendarLuna
         placeholder='dd/mm/yyyy'
         autoComplete='off'
         maxLength={10}
+        value={dayjs(value).format(format ?? 'MM/DD/YYYY')}
       />
       <IconDate />
       {isFocus && (
@@ -65,8 +72,9 @@ export const SelectCalendarLunar = ({ onSelect, value }: PropsSelectCalendarLuna
             customStyle={{
               boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
             }}
-            handleSelect={(date)=> {
-              onSelect(date)
+            handleSelect={(date) => {
+              onSelect(date);
+              setIsFocus(false);
             }}
             value={value}
           />
