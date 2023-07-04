@@ -14,6 +14,8 @@ type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
   args: {
-    value: new Date()
+    value: new Date(),
+    customStyle: {
+    }
   },
 };

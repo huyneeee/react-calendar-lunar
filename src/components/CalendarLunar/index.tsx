@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import React from 'react';
-import './calendar.css';
+// import './index.module.css';
+import { WrapperLunar } from './styled'
 import {
   CAN,
   CHI,
@@ -558,11 +559,11 @@ export const CalendarLunar = ({
   }, [dateSelect]);
 
   return (
-    <div
+    <WrapperLunar
       className={`${containerClass ?? ''} wrapper-calendar-lunar`}
       style={customStyle}
     >
       <div className='calendar-lunar'></div>
-    </div>
+    </WrapperLunar>
   );
 };
