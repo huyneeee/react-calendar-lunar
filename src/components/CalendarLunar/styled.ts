@@ -77,7 +77,7 @@ export const WrapperLunar = styled.div`
 }
 .amlich .homnay {
   border: 1.5px solid #f89696;
-  border-radius: 15px;
+  border-radius: 10px;
   color: #f89696;
   font-weight: 500;
 }
@@ -139,14 +139,14 @@ export const WrapperLunar = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 15px;
+  border-radius: 10px;
 }
 .amlich .homnay > div,
 .amlich .leam > div,
 .amlich .leduong > div,
 .amlich .ngaythang > div,
 .amlich .tet > div {
-  border-radius: 15px;
+  border-radius: 10px;
   overflow: hidden;
 }
 .amlich .leam::after,

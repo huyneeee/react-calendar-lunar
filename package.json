@@ -1,6 +1,6 @@
 {
   "name": "react-calendar-lunar",
-  "version": "3.0.0",
+  "version": "5.0.0",
   "description": "",
   "main": "dist/cjs/index.js",
   "module": "dist/esm/index.js",
@@ -50,7 +50,6 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "storybook": "^7.0.24",
-    "styled-components": "^6.0.2",
     "typescript": "^5.1.6"
   },
   "peerDependencies": {
@@ -58,6 +57,7 @@
     "react-dom": "^18.2.0"
   },
   "dependencies": {
-    "dayjs": "^1.11.9"
+    "dayjs": "^1.11.9",
+    "styled-components": "^6.0.2"
   }
 }
