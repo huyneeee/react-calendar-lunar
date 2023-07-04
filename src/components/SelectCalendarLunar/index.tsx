@@ -2,7 +2,7 @@ import dayjs from 'dayjs';
 import React, { useRef, useState } from 'react';
 import { useOnClickOutside } from '../../hook/useClickOutSide';
 import { CalendarLunar } from '../CalendarLunar/index';
-import './index.css';
+import { WrapperSelect, InputDatePicker, Modal } from './styled'
 
 const IconDate = ({ onClick }) => (
   <svg
@@ -53,8 +53,8 @@ export const SelectCalendarLunar = ({
   });
 
   return (
-    <div className='wrappper-select' ref={ref}>
-      <input
+    <WrapperSelect ref={ref}>
+      <InputDatePicker
         onClick={(e) => {
           e.preventDefault();
           e.stopPropagation();
@@ -72,7 +72,7 @@ export const SelectCalendarLunar = ({
         }}
       />
       {isFocus && (
-        <div className='popup-calendar-select'>
+        <Modal>
           <CalendarLunar
             customStyle={{
               boxShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
@@ -83,8 +83,8 @@ export const SelectCalendarLunar = ({
             }}
             value={value}
           />
-        </div>
+        </Modal>
       )}
-    </div>
+    </WrapperSelect>
   );
 };
