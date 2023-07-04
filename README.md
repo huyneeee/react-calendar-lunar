@@ -5,6 +5,9 @@
 
 `react-calendar-lunar` is an npm package built to provide an easy-to-use lunar and solar calendar component for your React applications. This package helps you display events, holidays, and additional information based on the lunar and solar calendar.
 
+![Alt text](https://f10-zpcloud.zdn.vn/678236097113421483/78786c32622eb270eb3f.jpg)
+![Alt text](https://f9-zpcloud.zdn.vn/6141911091444494729/0c6507300c2cdc72853d.jpg)
+
 ## Features
 
 - Display both lunar and solar calendars on the same interface.
