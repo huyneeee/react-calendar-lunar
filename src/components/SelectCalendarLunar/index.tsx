@@ -4,7 +4,7 @@ import { useOnClickOutside } from '../../hook/useClickOutSide';
 import { CalendarLunar } from '../CalendarLunar/index';
 import './index.css';
 
-const IconDate = () => (
+const IconDate = ({ onClick }) => (
   <svg
     xmlns='http://www.w3.org/2000/svg'
     width={24}
@@ -16,6 +16,7 @@ const IconDate = () => (
     strokeLinecap='round'
     strokeLinejoin='round'
     className='feather feather-calendar icon-date-select'
+    onClick={onClick}
   >
     <rect x={3} y={4} width={18} height={18} rx={2} ry={2} />
     <line x1={16} y1={2} x2={16} y2={6} />
@@ -65,7 +66,11 @@ export const SelectCalendarLunar = ({
         maxLength={10}
         value={dayjs(value).format(format ?? 'MM/DD/YYYY')}
       />
-      <IconDate />
+      <IconDate
+        onClick={() => {
+          setIsFocus(!isFocus);
+        }}
+      />
       {isFocus && (
         <div className='popup-calendar-select'>
           <CalendarLunar

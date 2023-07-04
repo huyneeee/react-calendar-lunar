@@ -31,9 +31,9 @@
   "author": "Nguyen Quang Huy (huyneeee)",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/huyneeee/react-canlendar-lunar/issues"
+    "url": "https://github.com/huyneeee/react-calendar-lunar/issues"
   },
-  "homepage": "https://github.com/huyneeee/react-canlendar-lunar#readme",
+  "homepage": "https://github.com/huyneeee/react-calendar-lunar#readme",
   "devDependencies": {
     "@storybook/addon-essentials": "^7.0.24",
     "@storybook/addon-interactions": "^7.0.24",
